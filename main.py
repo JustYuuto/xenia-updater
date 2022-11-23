@@ -17,6 +17,17 @@ def download():
     f.close()
 
 
+def download_canary():
+    print('Downloading Xenia Canary...')
+
+    r = requests.get(CANARY_DOWNLOAD)
+    r.raise_for_status()
+    print(f'Finished downloading Xenia Canary in {r.elapsed.seconds}.{r.elapsed.microseconds} seconds!')
+    f = open("xenia_canary.zip", "wb")
+    f.write(r.content)
+    f.close()
+
+
 def unzip():
     print('Unzipping Xenia archive...')
     file = 'xenia_master.zip'
@@ -29,6 +40,23 @@ def unzip():
     print('Unzipped and deleted Xenia archive!')
 
 
+def unzip_canary():
+    print('Unzipping Xenia Canary archive...')
+    file = 'xenia_canary.zip'
+
+    with zipfile.ZipFile(file, 'r') as zip_ref:
+        zip_ref.extract('xenia_canary.exe', '.')
+
+    os.remove(file)
+
+    print('Unzipped and deleted Xenia Canary archive!')
+
+
 if __name__ == '__main__':
     download()
+    download_canary()
     unzip()
+    unzip_canary()
+
+    print('')
+    os.system('pause')

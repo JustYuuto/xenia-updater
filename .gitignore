@@ -1,4 +1,7 @@
 /.idea/
 /venv/
 
+/build/
+/dist/
+
 xenia*[.exe, .zip]
